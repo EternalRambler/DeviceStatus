@@ -1,7 +1,7 @@
-package device.status.model;
+package device.status.br;
 
-/**
- * Created by Futrzak on 2017-03-15.
- */
+import device.status.model.DeviceCollection;
+
 public class DeviceStatus {
+    DeviceCollection deviceCollectiond;
 }
