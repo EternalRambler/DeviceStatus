@@ -8,6 +8,9 @@ public class Device {
     private boolean isPingAvailable;
     private boolean isSnmpAvailable;
 
+    private boolean pingStatus;
+    private boolean snmpStatus;
+
     public Device() {
     }
 
@@ -49,5 +52,21 @@ public class Device {
 
     public void setSnmpAvailable(boolean snmpAvailable) {
         isSnmpAvailable = snmpAvailable;
+    }
+
+    public boolean isPingStatus() {
+        return pingStatus;
+    }
+
+    public void setPingStatus(boolean pingStatus) {
+        this.pingStatus = pingStatus;
+    }
+
+    public boolean isSnmpStatus() {
+        return snmpStatus;
+    }
+
+    public void setSnmpStatus(boolean snmpStatus) {
+        this.snmpStatus = snmpStatus;
     }
 }
