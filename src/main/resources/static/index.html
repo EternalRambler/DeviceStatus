@@ -1,38 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hello WebSocket</title>
+    <title>Test System 1</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript"></script>
     <script src="/app.js"></script>
 
 </head>
-<body>
+<body onload="hideOnLoad()">
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
+    <div class="jumbotron">
+        <h1>Test System 1</h1>
+        <p>This service is use to monitored device status.</p>
+    </div>
     <div class="row">
-        <div class="col-md-6">
+            <div class="col-md-12">
             <form class="form-inline">
-                <div class="form-group">
-                    <label for="showPanel">Add Device</label>
+                <div class="form-group" style="float: right;">
                     <button id="showPanel" class="btn btn-default">Add Device</button>
-                    <label for="cancel">Cancel</label>
                     <button id="cancel" class="btn btn-danger">Cancel</button>
                 </div>
             </form>
         </div>
-        <div class="col-md-6" id="hide">
-            <form class="form-inline">
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="hide">
+            <form class="form-inline" name="addNewDeviceForm">
                 <div class="form-group">
                     <label for="deviceName">Device Name</label>
-                    <input type="text" id="deviceName" class="form-control" placeholder="Device name...">
+                    <input type="text" id="deviceName" class="form-control" placeholder="Device name..." name="deviceName">
                     <label for="deviceIp">Device IP:</label>
-                    <input type="text" id="deviceIp" class="form-control" placeholder="Device name...">
+                    <input type="text" id="deviceIp" class="form-control" placeholder="Device IP..." name="deviceIp">
+                    <button id="addDevice" class="btn btn-default" onclick="addDeviceFunctionAjax(event);">Add</button>
                 </div>
-                <button id="addDevice" class="btn btn-default" type="submit">Add</button>
             </form>
         </div>
     </div>
@@ -41,10 +46,14 @@
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th>Device Name</th>
+                    <th>IP</th>
+                    <th>Hostname</th>
+                    <th>Ping</th>
+                    <th>SNMP</th>
                 </tr>
                 </thead>
-                <tbody id="greetings">
+                <tbody id="tableOfDevices">
                 </tbody>
             </table>
         </div>
