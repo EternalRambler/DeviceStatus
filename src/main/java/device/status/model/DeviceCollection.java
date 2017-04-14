@@ -1,9 +1,11 @@
 package device.status.model;
 
+import device.status.model.Device;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +15,10 @@ public class DeviceCollection {
 
     private List<Device> deviceList = new ArrayList<>();
 
-    public List<Device> getDeviceList() {
-        return deviceList;
+    @RequestMapping("/")
+    public ModelAndView getDeviceList(ModelMap modelMap) {
+        modelMap.addAttribute("devices", deviceList);
+        return new ModelAndView("index", modelMap);
     }
 
     public void setDeviceList(List<Device> deviceList) {
