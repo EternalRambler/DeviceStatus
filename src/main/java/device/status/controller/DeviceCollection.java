@@ -1,6 +1,7 @@
-package device.status.model;
+package device.status.controller;
 
 import device.status.model.Device;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -13,12 +14,16 @@ import java.util.List;
 @Controller
 public class DeviceCollection {
 
-    private List<Device> deviceList = new ArrayList<>();
+    public static List<Device> deviceList = new ArrayList<>();
 
     @RequestMapping("/")
     public ModelAndView getDeviceList(ModelMap modelMap) {
         modelMap.addAttribute("devices", deviceList);
         return new ModelAndView("index", modelMap);
+    }
+
+    public static List<Device> getDeviceList(){
+        return deviceList;
     }
 
     public void setDeviceList(List<Device> deviceList) {

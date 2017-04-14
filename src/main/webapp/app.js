@@ -12,18 +12,6 @@ $(document).ready(function(){
 function hideOnLoad(){
     $("#hide").hide();
 };
-
-//function addDeviceFunction(){
-//    $("#tableOfDevices")
-//    .append("<tr class =\"success\"><td>" + "TEST" + "</td> "
-//    + "<td>" + "NO IP" + "</td>"
-//    + "<td>" + "No Hostname" + "</td>"
-//    + "<td>" + "NO Ping" + "</td>"
-//    + "<td>" + "NO SNMP" + "</td></tr>");
-//    document.addNewDeviceForm.submit();
-//    return false;
-//}
-
 function addDeviceFunctionAjax(event, deviceName, deviceIp){
     event.preventDefault();
     var button = document.getElementById("addDevice");
