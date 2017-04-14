@@ -17,7 +17,8 @@ public class DeviceStatus {
 
     List<Device> deviceList = DeviceCollection.getDeviceList();
 
-    DeviceChecker deviceChecker = new DeviceChecker();
+    @Autowired
+    DeviceChecker deviceChecker;
 
     @Scheduled(fixedRate = 6000)
     public void checkDevices(){
