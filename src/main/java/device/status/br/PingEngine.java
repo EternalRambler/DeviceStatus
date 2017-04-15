@@ -1,21 +1,15 @@
 package device.status.br;
 
-import com.sun.javafx.binding.StringFormatter;
-import device.status.model.Device;
-import org.apache.log4j.Logger;
-import org.apache.log4j.Priority;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Futrzak on 2017-04-14
- */
+@Component
 public class PingEngine {
 
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(PingEngine.class);
@@ -31,8 +25,6 @@ public class PingEngine {
             inet4Address = InetAddress.getByName(ipAddress);
             returnValue = inet4Address.isReachable(1000);
             log.info("Send ping to: " + ipAddress + " RESULT: " + returnValue);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
