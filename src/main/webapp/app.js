@@ -40,3 +40,28 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
      });
 }
 
+var t = setInterval(updateRow, 1000);
+
+function updateRow(){
+    var trs = document.getElementById("tableOfDevices").getElementsByTagName("tr");
+
+     for(var i=0; i<trs.length; i++){
+     console.log(trs[i].getElementsByTagName("td"));
+        updateDevicePingStatus(trs[i]);
+     }
+
+
+};
+
+function updateDevicePingStatus(tableData){
+     $.ajax({
+            url: 'getDevicePingStatus',
+            type: 'GET',
+            data:{
+                        deviceId : tableData.id
+                   },
+            success : function(data) {
+                tableData.getElementsByTagName("td")[3].innerHTML = data;
+            }});
+};
+

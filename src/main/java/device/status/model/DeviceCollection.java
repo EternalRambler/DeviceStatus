@@ -23,8 +23,8 @@ public class DeviceCollection {
         return deviceList.remove(device);
     }
 
-    public Device getDevice(String name){
-        return deviceList.stream().filter(d -> d.getName().equals(name)).findFirst().get();
+    public Device getDevice(String deviceId){
+        return deviceList.stream().filter(d -> d.getId().equals(deviceId)).findFirst().get();
     }
 
     public Device addDevice(String deviceName, String deviceIp){
