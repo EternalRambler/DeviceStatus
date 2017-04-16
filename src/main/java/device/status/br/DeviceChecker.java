@@ -8,6 +8,6 @@ public class DeviceChecker {
 
     public void checkDevice(Device device){
         PingEngine pingEngine= new PingEngine();
-        pingEngine.pingAddress(device.getIpAddress());
+        device.setPingStatus(pingEngine.pingAddress(device.getIpAddress()) ? "&#10003;" : "&#10007;");
     }
 }

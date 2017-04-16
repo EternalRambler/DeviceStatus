@@ -64,8 +64,8 @@
                 <td>${device.name}</td>
                 <td>${device.ipAddress}</td>
                 <td>No Hostname</td>
-                <td>NO Ping</td>
-                <td>NO SNMP</td>
+                <td>${device.pingStatus}</td>
+                <td>${device.snmpStatus}</td>
                 </tr>
                 </c:forEach>
                 </tbody>
