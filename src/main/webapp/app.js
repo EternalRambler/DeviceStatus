@@ -13,13 +13,10 @@ function hideOnLoad(){
     $("#hide").hide();
 };
 
-function getStatusMark(value){
-    if(value){
-        return "&#10003;";
-    } else {
-        return "&#10007;";
-    }
-}
+function getStatusMark(data){
+    return "success";
+};
+
 function addDeviceFunctionAjax(event, deviceName, deviceIp){
     event.preventDefault();
     var button = document.getElementById("addDevice");
@@ -34,7 +31,7 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
                },
         success : function(data) {
         $("#tableOfDevices")
-            .append("<tr class =\"success\"><td>" + data.name + "</td> "
+            .append("<tr class =" + getStatusMark(data) + " id=" + data.id + "><td>" + data.name + "</td> "
             + "<td>" + data.ipAddress + "</td>"
             + "<td>" + "No Hostname" + "</td>"
             + "<td>" + data.pingStatus + "</td>"

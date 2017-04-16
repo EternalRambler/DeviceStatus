@@ -1,6 +1,10 @@
 package device.status.model;
 
+import java.util.UUID;
+
 public class Device {
+    private String id;
+
     private String ipAddress;
     private String name;
     private String description;
@@ -12,6 +16,11 @@ public class Device {
     private String snmpStatus;
 
     public Device() {
+        id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getIpAddress() {

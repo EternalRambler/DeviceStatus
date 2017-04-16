@@ -60,7 +60,7 @@
                 </thead>
                 <tbody id="tableOfDevices">
                 <c:forEach var="device" items="${devices}">
-                <tr class ="success">
+                <tr class ="success" id=${device.id}>
                 <td>${device.name}</td>
                 <td>${device.ipAddress}</td>
                 <td>No Hostname</td>
