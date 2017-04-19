@@ -18,7 +18,7 @@ public class DeviceStatus {
     @Autowired
     DeviceChecker deviceChecker;
 
-    @Scheduled(fixedRate = 6000)
+    @Scheduled(fixedRate = 60000)
     public void checkDevices(){
         deviceList.getDeviceList().forEach(device -> deviceChecker.checkDevice(device));
     }
