@@ -12,6 +12,11 @@ $(document).ready(function(){
 function hideOnLoad(){
     $("#hide").hide();
 };
+
+function getStatusMark(data){
+    return "success";
+};
+
 function addDeviceFunctionAjax(event, deviceName, deviceIp){
     event.preventDefault();
     var button = document.getElementById("addDevice");
@@ -25,14 +30,38 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
                     deviceIp : deviceIp
                },
         success : function(data) {
-        console.log(data);
         $("#tableOfDevices")
-            .append("<tr class =\"success\"><td>" + data.name + "</td> "
+            .append("<tr class =" + getStatusMark(data) + " id=" + data.id + "><td>" + data.name + "</td> "
             + "<td>" + data.ipAddress + "</td>"
             + "<td>" + "No Hostname" + "</td>"
-            + "<td>" + "NO Ping" + "</td>"
-            + "<td>" + "NO SNMP" + "</td></tr>");
+            + "<td>" + data.pingStatus + "</td>"
+            + "<td>" + data.snmpStatus + "</td></tr>");
         }
      });
 }
+
+var t = setInterval(updateRow, 1000);
+
+function updateRow(){
+    var trs = document.getElementById("tableOfDevices").getElementsByTagName("tr");
+
+     for(var i=0; i<trs.length; i++){
+     console.log(trs[i].getElementsByTagName("td"));
+        updateDevicePingStatus(trs[i]);
+     }
+
+
+};
+
+function updateDevicePingStatus(tableData){
+     $.ajax({
+            url: 'getDevicePingStatus',
+            type: 'GET',
+            data:{
+                        deviceId : tableData.id
+                   },
+            success : function(data) {
+                tableData.getElementsByTagName("td")[3].innerHTML = data;
+            }});
+};
 

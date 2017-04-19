@@ -17,6 +17,7 @@
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
+    <button type="button" class="btn btn-default navbar-btn">Sign in</button>
     <div class="jumbotron">
         <h1>Test System 1</h1>
         <p>This service is use to monitored device status.</p>
@@ -48,7 +49,6 @@
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
                 <thead>
-
                 <tr>
                     <th>Device Name</th>
                     <th>Ip Address</th>
@@ -56,16 +56,15 @@
                     <th>Ping</th>
                     <th>SNMP</th>
                 </tr>
-
                 </thead>
                 <tbody id="tableOfDevices">
                 <c:forEach var="device" items="${devices}">
-                <tr class ="success">
+                <tr class ="success" id=${device.id}>
                 <td>${device.name}</td>
                 <td>${device.ipAddress}</td>
                 <td>No Hostname</td>
-                <td>NO Ping</td>
-                <td>NO SNMP</td>
+                <td>${device.pingStatus}</td>
+                <td>${device.snmpStatus}</td>
                 </tr>
                 </c:forEach>
                 </tbody>

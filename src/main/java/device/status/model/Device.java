@@ -1,6 +1,10 @@
 package device.status.model;
 
+import java.util.UUID;
+
 public class Device {
+    private String id;
+
     private String ipAddress;
     private String name;
     private String description;
@@ -8,10 +12,15 @@ public class Device {
     private boolean isPingAvailable;
     private boolean isSnmpAvailable;
 
-    private boolean pingStatus;
-    private boolean snmpStatus;
+    private String pingStatus;
+    private String snmpStatus;
 
     public Device() {
+        id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getIpAddress() {
@@ -54,19 +63,19 @@ public class Device {
         isSnmpAvailable = snmpAvailable;
     }
 
-    public boolean isPingStatus() {
+    public String getPingStatus() {
         return pingStatus;
     }
 
-    public void setPingStatus(boolean pingStatus) {
+    public void setPingStatus(String pingStatus) {
         this.pingStatus = pingStatus;
     }
 
-    public boolean isSnmpStatus() {
+    public String getSnmpStatus() {
         return snmpStatus;
     }
 
-    public void setSnmpStatus(boolean snmpStatus) {
+    public void setSnmpStatus(String snmpStatus) {
         this.snmpStatus = snmpStatus;
     }
 }
