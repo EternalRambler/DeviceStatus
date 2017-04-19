@@ -3,7 +3,9 @@ package device.status.br;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -30,5 +32,29 @@ public class PingEngine {
         }
 
         return returnValue;
+    }
+
+    public boolean pingAddressBySystemPing(String ipAddress){
+        String pingResult = "";
+
+        String pingCmd = "ping -n 1 " + ipAddress;
+        try {
+            Runtime r = Runtime.getRuntime();
+            Process p = r.exec(pingCmd);
+
+            BufferedReader in = new BufferedReader(new
+                    InputStreamReader(p.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                System.out.println(inputLine);
+                pingResult += inputLine;
+            }
+            in.close();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        return pingResult.contains("Reply from " + ipAddress) || pingResult.contains("Odpowied� z " + ipAddress);
     }
 }

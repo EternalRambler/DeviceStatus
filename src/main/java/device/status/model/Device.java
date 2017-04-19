@@ -1,9 +1,12 @@
 package device.status.model;
 
+import device.status.br.SNMPManager;
+
 import java.util.UUID;
 
 public class Device {
     private String id;
+    private SNMPManager snmpManager;
 
     private String ipAddress;
     private String name;
