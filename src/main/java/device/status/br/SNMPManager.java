@@ -1,5 +1,7 @@
 package device.status.br;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.snmp4j.*;
 import org.snmp4j.event.ResponseEvent;
 import org.snmp4j.mp.SnmpConstants;
@@ -9,6 +11,8 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 import java.io.IOException;
 
 public class SNMPManager {
+    private static final Logger log = LoggerFactory.getLogger(DeviceStatus.class);
+
     Snmp snmp = null;
     String ipAddress = null;
 
@@ -23,13 +27,32 @@ public class SNMPManager {
         transport.listen();
     }
 
-    public String getAsString(OID oid) throws IOException {
-        ResponseEvent event = get(new OID[] { oid });
-        return event.getResponse().get(0).getVariable().toString();
+    public String getAsString(OID oid){
+        ResponseEvent event = null;
+        try {
+            event = get(new OID[] { oid });
+            PDU pdu = event.getResponse();
+            if (pdu != null) {
+                return pdu.get(0).getVariable().toString();
+            } else {
+                return null;
+            }
+        } catch (IOException e) {
+            log.error("Something goes wrong!!!", e);
+            return null;
+        }
     }
 
-    public String getHostName() throws IOException {
+    public String getHostName() {
         return getAsString(new OID(".1.3.6.1.2.1.1.5.0"));
+    }
+
+    public String getOsVersion() {
+        return getAsString(new OID(".1.3.6.1.2.1.1.1"));
+    }
+
+    public String getUpTime() {
+        return getAsString(new OID(".1.3.6.1.2.1.1.3.0"));
     }
 
     public ResponseEvent get(OID oids[]) throws IOException {

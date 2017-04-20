@@ -29,6 +29,52 @@ public class DeviceController {
     @GetMapping(value = "/getDevicePingStatus")
     @ResponseBody
     public String getDevicePingStatus(@RequestParam("deviceId") String deviceId){
-        return deviceList.getDevice(deviceId).getPingStatus();
+        String returnVelue = deviceList.getDevice(deviceId).getPingStatus();
+        return (returnVelue == null || returnVelue.isEmpty()) ? "&#10007;" : returnVelue;
+    }
+
+    @GetMapping(value = "/getDeviceHostNameStatus")
+    @ResponseBody
+    public String getDeviceHostNameStatus(@RequestParam("deviceId") String deviceId){
+        String returnValue = deviceList.getDevice(deviceId).getHostName();
+        return (returnValue == null || returnValue.isEmpty()) ? "&#10007;" : returnValue;
+    }
+
+    @GetMapping(value = "/getDeviceOsStatus")
+    @ResponseBody
+    public String getDeviceOsStatus(@RequestParam("deviceId") String deviceId){
+        String returnValue = deviceList.getDevice(deviceId).getOsVersion();
+        return (returnValue == null || returnValue.isEmpty()) ? "&#10007;" : returnValue;
+    }
+
+    @GetMapping(value = "/getDeviceUpTimeStatus")
+    @ResponseBody
+    public String getUpTimeStatus(@RequestParam("deviceId") String deviceId){
+        String returnValue = deviceList.getDevice(deviceId).getUpTime();
+        return (returnValue == null || returnValue.isEmpty()) ? "&#10007;" : returnValue;
+    }
+
+    @GetMapping(value = "/getDeviceOverviewStatus")
+    @ResponseBody
+    public int getOverviewStatus(@RequestParam("deviceId") String deviceId){
+        Device device = deviceList.getDevice(deviceId);
+        int returnValue = 0;
+        if (device.getOsVersion() != null){
+            returnValue++;
+        }
+
+        if (device.getHostName() != null){
+            returnValue++;
+        }
+
+        if(device.getUpTime() != null){
+            returnValue++;
+        }
+
+        if (device.getPingStatus() != null && !device.getPingStatus().equals("&#10007;")){
+            returnValue++;
+        }
+
+        return returnValue;
     }
 }
