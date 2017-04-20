@@ -52,9 +52,10 @@
                 <tr>
                     <th>Device Name</th>
                     <th>Ip Address</th>
-                    <th>Hostname</th>
                     <th>Ping</th>
-                    <th>SNMP</th>
+                    <th>Hostname</th>
+                    <th>OS Version</th>
+                    <th>UpTime</th>
                 </tr>
                 </thead>
                 <tbody id="tableOfDevices">
@@ -62,9 +63,10 @@
                 <tr class ="success" id=${device.id}>
                 <td>${device.name}</td>
                 <td>${device.ipAddress}</td>
-                <td>No Hostname</td>
                 <td>${device.pingStatus}</td>
-                <td>${device.snmpStatus}</td>
+                <td>${device.hostName}</td>
+                <td>${device.osVersion}</td>
+                <td>${device.upTime}</td>
                 </tr>
                 </c:forEach>
                 </tbody>

@@ -1,22 +1,18 @@
 package device.status.model;
 
-import device.status.br.SNMPManager;
-
 import java.util.UUID;
 
 public class Device {
     private String id;
-    private SNMPManager snmpManager;
 
     private String ipAddress;
     private String name;
     private String description;
 
-    private boolean isPingAvailable;
-    private boolean isSnmpAvailable;
-
     private String pingStatus;
-    private String snmpStatus;
+    private String hostName;
+    private String osVersion;
+    private String upTime;
 
     public Device() {
         id = UUID.randomUUID().toString();
@@ -50,22 +46,6 @@ public class Device {
         this.description = description;
     }
 
-    public boolean isPingAvailable() {
-        return isPingAvailable;
-    }
-
-    public void setPingAvailable(boolean pingAvailable) {
-        isPingAvailable = pingAvailable;
-    }
-
-    public boolean isSnmpAvailable() {
-        return isSnmpAvailable;
-    }
-
-    public void setSnmpAvailable(boolean snmpAvailable) {
-        isSnmpAvailable = snmpAvailable;
-    }
-
     public String getPingStatus() {
         return pingStatus;
     }
@@ -74,11 +54,27 @@ public class Device {
         this.pingStatus = pingStatus;
     }
 
-    public String getSnmpStatus() {
-        return snmpStatus;
+    public String getHostName() {
+        return hostName;
     }
 
-    public void setSnmpStatus(String snmpStatus) {
-        this.snmpStatus = snmpStatus;
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    public void setOsVersion(String osVersion) {
+        this.osVersion = osVersion;
+    }
+
+    public String getUpTime() {
+        return upTime;
+    }
+
+    public void setUpTime(String upTime) {
+        this.upTime = upTime;
     }
 }

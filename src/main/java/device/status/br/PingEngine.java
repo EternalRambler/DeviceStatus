@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +27,8 @@ public class PingEngine {
             returnValue = inet4Address.isReachable(1000);
             log.info("Send ping to: " + ipAddress + " RESULT: " + returnValue);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Something goes wrong!!!", e);
+            returnValue = false;
         }
 
         return returnValue;
@@ -46,13 +46,13 @@ public class PingEngine {
                     InputStreamReader(p.getInputStream()));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println(inputLine);
                 pingResult += inputLine;
             }
             in.close();
 
         } catch (IOException e) {
-            System.out.println(e);
+            log.error("Something goes wrong!!!", e);
+            return false;
         }
 
         return pingResult.contains("Reply from " + ipAddress) || pingResult.contains("Odpowied� z " + ipAddress);
