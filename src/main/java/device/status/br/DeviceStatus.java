@@ -14,8 +14,8 @@ public class DeviceStatus {
     @Autowired
     DeviceChecker deviceChecker;
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 6000)
     public void checkDevices(){
-        deviceList.getDeviceList().forEach(device -> deviceChecker.checkDevice(device));
+        deviceList.getDeviceList().parallelStream().forEach(device -> deviceChecker.checkDevice(device));
     }
 }

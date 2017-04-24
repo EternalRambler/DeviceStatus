@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class DeviceCollection {
 
-    public List<Device> deviceList = new ArrayList<>();
+    public List<Device> deviceList = Collections.synchronizedList(new ArrayList<>());
 
     public List<Device> getDeviceList(){
         return deviceList;
