@@ -16,6 +16,6 @@ public class DeviceStatus {
 
     @Scheduled(fixedRate = 6000)
     public void checkDevices(){
-        deviceList.getDeviceList().forEach(device -> deviceChecker.checkDevice(device));
+        deviceList.getDeviceList().parallelStream().forEach(device -> deviceChecker.checkDevice(device));
     }
 }

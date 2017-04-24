@@ -35,7 +35,7 @@ public class SNMPManager {
             if (pdu != null) {
                 return pdu.get(0).getVariable().toString();
             } else {
-                return null;
+                return "&#10007;";
             }
         } catch (IOException e) {
             log.error("Something goes wrong!!!", e);
