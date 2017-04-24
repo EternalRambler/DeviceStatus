@@ -25,7 +25,7 @@ public class DeviceController {
     public Device addDevice(@RequestParam("deviceName") String deviceName, @RequestParam("deviceIp") String deviceIp){
         return deviceList.addDevice(deviceName, deviceIp);
     }
-
+/*
     @GetMapping(value = "/getDevicePingStatus")
     @ResponseBody
     public String getDevicePingStatus(@RequestParam("deviceId") String deviceId){
@@ -76,5 +76,11 @@ public class DeviceController {
         }
 
         return returnValue;
+    }*/
+
+    @GetMapping(value = "/getDevice")
+    @ResponseBody
+    public Device getDevice(@RequestParam("deviceId") String deviceId){
+        return deviceList.getDevice(deviceId);
     }
 }

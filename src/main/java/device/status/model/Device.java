@@ -13,6 +13,7 @@ public class Device {
     private String hostName;
     private String osVersion;
     private String upTime;
+    private String lastUpdate;
 
     public Device() {
         id = UUID.randomUUID().toString();
@@ -76,5 +77,13 @@ public class Device {
 
     public void setUpTime(String upTime) {
         this.upTime = upTime;
+    }
+
+    public String getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

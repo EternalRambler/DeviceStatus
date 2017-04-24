@@ -56,6 +56,7 @@
                     <th>Hostname</th>
                     <th>OS Version</th>
                     <th>UpTime</th>
+                    <th>Last Update</th>
                 </tr>
                 </thead>
                 <tbody id="tableOfDevices">
@@ -67,6 +68,7 @@
                 <td>${device.hostName}</td>
                 <td>${device.osVersion}</td>
                 <td>${device.upTime}</td>
+                <td>${device.lastUpdate}</td>
                 </tr>
                 </c:forEach>
                 </tbody>

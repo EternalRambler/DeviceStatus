@@ -5,14 +5,13 @@ import device.status.model.Device;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class DeviceCollection {
 
     public List<Device> deviceList = new ArrayList<>();
-
-    public List<SNMPManager> snmpManagerList = new ArrayList<>();
 
     public List<Device> getDeviceList(){
         return deviceList;

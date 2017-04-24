@@ -62,27 +62,29 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
                },
         success : function(data) {
         $("#tableOfDevices")
-            .append("<tr class =" + getStatusMark(data) + " id=" + data.id + "><td>" + data.name + "</td> "
+            .append("<tr class =success id=" + data.id + "><td>" + data.name + "</td> "
             + "<td>" + data.ipAddress + "</td>"
             + "<td>" + removeNulls(data.pingStatus) + "</td>"
             + "<td>" + removeNulls(data.hostName) + "</td>"
             + "<td>" + removeNulls(data.osVersion) + "</td>"
-            + "<td>" + removeNulls(data.upTime) + "</td></tr>");
+            + "<td>" + removeNulls(data.upTime) + "</td>"
+            + "<td>" + removeNulls(data.lastUpdate) + "</td></tr>");
         }
      });
 }
 
-var t = setInterval(updateRow, 1000);
+var t = setInterval(updateRow, 15000);
 
 function updateRow(){
     var trs = document.getElementById("tableOfDevices").getElementsByTagName("tr");
 
      for(var i=0; i<trs.length; i++){
-        updateDevicePingStatus(trs[i]);
+        /*updateDevicePingStatus(trs[i]);
         updateDeviceHostNameStatus(trs[i]);
         updateDeviceOsStatus(trs[i]);
         updateDeviceUpTimeStatus(trs[i]);
-        updateTableClass(trs[i]);
+        updateTableClass(trs[i]);*/
+        updateDeviceStatus(trs[i]);
      }
 };
 
@@ -91,7 +93,7 @@ console.log(getStatusMark(tableData.className));
     tableData.className = getStatusMark(tableData);
 }
 
-function updateDevicePingStatus(tableData){
+/*function updateDevicePingStatus(tableData){
      $.ajax({
             url: 'getDevicePingStatus',
             type: 'GET',
@@ -136,5 +138,21 @@ function updateDeviceUpTimeStatus(tableData){
                    },
             success : function(data) {
                 tableData.getElementsByTagName("td")[5].innerHTML = data;
+            }});
+};*/
+
+function updateDeviceStatus(tableData){
+     $.ajax({
+            url: 'getDevice',
+            type: 'GET',
+            data:{
+                        deviceId : tableData.id
+                   },
+            success : function(data) {
+                tableData.getElementsByTagName("td")[2].innerHTML = data.pingStatus;
+                tableData.getElementsByTagName("td")[3].innerHTML = data.hostName;
+                tableData.getElementsByTagName("td")[4].innerHTML = data.osVersion;
+                tableData.getElementsByTagName("td")[5].innerHTML = data.upTime;
+                tableData.getElementsByTagName("td")[6].innerHTML = data.lastUpdate;
             }});
 };
