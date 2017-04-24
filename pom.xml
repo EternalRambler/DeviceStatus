@@ -52,6 +52,14 @@
             <artifactId>jquery</artifactId>
             <version>3.1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>snmp4j</groupId>
+            <artifactId>snmp4j</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/thirdparty/snmp4j-2.5.6.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
