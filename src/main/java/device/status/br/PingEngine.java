@@ -1,6 +1,8 @@
 package device.status.br;
 
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -9,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Future;
 
 @Component
 public class PingEngine {
@@ -34,7 +37,8 @@ public class PingEngine {
         return returnValue;
     }
 
-    public boolean pingAddressBySystemPing(String ipAddress){
+    @Async
+    public Future<Boolean> pingAddressBySystemPing(String ipAddress){
         String pingResult = "";
 
         String pingCmd = "ping -n 1 " + ipAddress;
@@ -52,9 +56,9 @@ public class PingEngine {
 
         } catch (IOException e) {
             log.error("Something goes wrong!!!", e);
-            return false;
+            return new AsyncResult<>(false);
         }
 
-        return pingResult.contains("Reply from " + ipAddress) || pingResult.contains("Odpowied� z " + ipAddress);
+        return new AsyncResult<>(pingResult.contains("Reply from " + ipAddress) || pingResult.contains("Odpowied� z " + ipAddress));
     }
 }
