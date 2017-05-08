@@ -73,7 +73,7 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
      });
 }
 
-var t = setInterval(updateRow, 15000);
+var t = setInterval(updateRow, 60000);
 
 function updateRow(){
     var trs = document.getElementById("tableOfDevices").getElementsByTagName("tr");

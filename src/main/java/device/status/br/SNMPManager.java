@@ -7,8 +7,11 @@ import org.snmp4j.event.ResponseEvent;
 import org.snmp4j.mp.SnmpConstants;
 import org.snmp4j.smi.*;
 import org.snmp4j.transport.DefaultUdpTransportMapping;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 import java.io.IOException;
+import java.util.concurrent.Future;
 
 public class SNMPManager {
     private static final Logger log = LoggerFactory.getLogger(DeviceStatus.class);
@@ -43,16 +46,19 @@ public class SNMPManager {
         }
     }
 
-    public String getHostName() {
-        return getAsString(new OID(".1.3.6.1.2.1.1.5.0"));
+    @Async
+    public Future<String> getHostName() {
+        return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.5.0")));
     }
 
-    public String getOsVersion() {
-        return getAsString(new OID(".1.3.6.1.2.1.1.1"));
+    @Async
+    public Future<String> getOsVersion() {
+        return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.1")));
     }
 
-    public String getUpTime() {
-        return getAsString(new OID(".1.3.6.1.2.1.1.3.0"));
+    @Async
+    public Future<String> getUpTime() {
+        return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.3.0")));
     }
 
     public ResponseEvent get(OID oids[]) throws IOException {
