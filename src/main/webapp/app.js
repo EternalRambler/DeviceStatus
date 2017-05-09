@@ -14,7 +14,6 @@ function hideOnLoad(){
 };
 
 function getStatusMark(tableData) {
-        var value;
         $.ajax({
             url: 'getDeviceOverviewStatus',
             type: 'GET',
@@ -22,22 +21,24 @@ function getStatusMark(tableData) {
                     deviceId : tableData.id
                 },
         success : function(data){
+            var value;
             switch(data) {
                 case 4:
-                    value = "success";
+                    tableData.className = "success";
                     break;
                 case 3:
                 case 2:
                 case 1:
-                    value = "warning";
+                    tableData.className = "warning";
                     break;
                 default:
-                    value = "danger";
+                    tableData.className = "danger";
+                    break;
             }
+            console.log("Value in function: " + value)
+            console.log("Class name for 'tr' in function: " + tableData.className)
         }
         })
-
-        return value;
 };
 
 function removeNulls(data){
@@ -45,7 +46,6 @@ function removeNulls(data){
         return "&#10007;";
     }
     return data;
-
 };
 
 function addDeviceFunctionAjax(event, deviceName, deviceIp){
@@ -73,7 +73,7 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
      });
 }
 
-var t = setInterval(updateRow, 60000);
+var t = setInterval(updateRow, 6000);
 
 function updateRow(){
     var trs = document.getElementById("tableOfDevices").getElementsByTagName("tr");
@@ -82,16 +82,11 @@ function updateRow(){
         /*updateDevicePingStatus(trs[i]);
         updateDeviceHostNameStatus(trs[i]);
         updateDeviceOsStatus(trs[i]);
-        updateDeviceUpTimeStatus(trs[i]);
-        updateTableClass(trs[i]);*/
+        updateDeviceUpTimeStatus(trs[i]);*/
+        getStatusMark(trs[i]);
         updateDeviceStatus(trs[i]);
      }
 };
-
-function updateTableClass(tableData){
-console.log(getStatusMark(tableData.className));
-    tableData.className = getStatusMark(tableData);
-}
 
 /*function updateDevicePingStatus(tableData){
      $.ajax({
@@ -149,10 +144,10 @@ function updateDeviceStatus(tableData){
                         deviceId : tableData.id
                    },
             success : function(data) {
-                tableData.getElementsByTagName("td")[2].innerHTML = data.pingStatus;
-                tableData.getElementsByTagName("td")[3].innerHTML = data.hostName;
-                tableData.getElementsByTagName("td")[4].innerHTML = data.osVersion;
-                tableData.getElementsByTagName("td")[5].innerHTML = data.upTime;
-                tableData.getElementsByTagName("td")[6].innerHTML = data.lastUpdate;
+                tableData.getElementsByTagName("td")[2].innerHTML = removeNulls(data.pingStatus);
+                tableData.getElementsByTagName("td")[3].innerHTML = removeNulls(data.hostName);
+                tableData.getElementsByTagName("td")[4].innerHTML = removeNulls(data.osVersion);
+                tableData.getElementsByTagName("td")[5].innerHTML = removeNulls(data.upTime);
+                tableData.getElementsByTagName("td")[6].innerHTML = removeNulls(data.lastUpdate);
             }});
 };
