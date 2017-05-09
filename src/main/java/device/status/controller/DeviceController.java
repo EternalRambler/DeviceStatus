@@ -53,6 +53,7 @@ public class DeviceController {
         String returnValue = deviceList.getDevice(deviceId).getUpTime();
         return (returnValue == null || returnValue.isEmpty()) ? "&#10007;" : returnValue;
     }
+    */
 
     @GetMapping(value = "/getDeviceOverviewStatus")
     @ResponseBody
@@ -76,7 +77,7 @@ public class DeviceController {
         }
 
         return returnValue;
-    }*/
+    }
 
     @GetMapping(value = "/getDevice")
     @ResponseBody

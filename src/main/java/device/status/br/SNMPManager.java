@@ -38,7 +38,7 @@ public class SNMPManager {
             if (pdu != null) {
                 return pdu.get(0).getVariable().toString();
             } else {
-                return "&#10007;";
+                return null;
             }
         } catch (IOException e) {
             log.error("Something goes wrong!!!", e);
@@ -53,7 +53,7 @@ public class SNMPManager {
 
     @Async
     public Future<String> getOsVersion() {
-        return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.1")));
+        return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.1.0")));
     }
 
     @Async

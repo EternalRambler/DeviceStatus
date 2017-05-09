@@ -25,9 +25,8 @@ public class Application extends AsyncConfigurerSupport {
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(5);
-        executor.setMaxPoolSize(5);
+        executor.setMaxPoolSize(15);
         executor.setQueueCapacity(500);
-        executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setKeepAliveSeconds(5);
         executor.initialize();
         return executor;
