@@ -1,5 +1,6 @@
 package device.status.controller;
 
+import device.status.br.SystemTools;
 import device.status.model.Device;
 import device.status.model.DeviceCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class DeviceController {
 
     @Autowired
     DeviceCollection deviceList;
+
+    @Autowired
+    SystemTools systemTools;
 
     @RequestMapping("/")
     public ModelAndView getDeviceList(ModelMap modelMap) {
@@ -54,6 +58,12 @@ public class DeviceController {
         return (returnValue == null || returnValue.isEmpty()) ? "&#10007;" : returnValue;
     }
     */
+
+    @PostMapping(value = "/saveSystem")
+    @ResponseBody
+    public String saveSystem(){
+        return systemTools.saveDataToXml() ? "OK" : " NOT OK";
+    }
 
     @GetMapping(value = "/getDeviceOverviewStatus")
     @ResponseBody

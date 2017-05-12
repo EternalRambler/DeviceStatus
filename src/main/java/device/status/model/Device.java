@@ -1,7 +1,9 @@
 package device.status.model;
 
+import javax.xml.bind.annotation.*;
 import java.util.UUID;
 
+@XmlRootElement
 public class Device {
     private String id;
 
@@ -23,10 +25,16 @@ public class Device {
         return id;
     }
 
+    @XmlAttribute
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getIpAddress() {
         return ipAddress;
     }
 
+    @XmlElement
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
@@ -35,6 +43,7 @@ public class Device {
         return name;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }

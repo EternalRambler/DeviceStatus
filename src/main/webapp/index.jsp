@@ -17,7 +17,7 @@
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
-    <button type="button" class="btn btn-default navbar-btn">Sign in</button>
+    <button type="button" class="btn btn-default navbar-btn" onclick="saveSystem(event);">Sign in</button>
     <div class="jumbotron">
         <h1>Test System 1</h1>
         <p>This service is use to monitored device status.</p>
@@ -57,6 +57,7 @@
                     <th>OS Version</th>
                     <th>UpTime</th>
                     <th>Last Update</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody id="tableOfDevices">
@@ -69,6 +70,7 @@
                 <td>${device.osVersion}</td>
                 <td>${device.upTime}</td>
                 <td>${device.lastUpdate}</td>
+                <td><a href="#" class="confirm-delete btn mini red-stripe" role="button" data-title="kitty" data-id="2">Delete</a></td>
                 </tr>
                 </c:forEach>
                 </tbody>
@@ -77,5 +79,17 @@
     </div>
     </form>
 </div>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h3 id="myModalLabel">Delete</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            <button data-dismiss="modal" class="btn red" id="btnYes">Confirm</button>
+                        </div>
 </body>
 </html>
