@@ -1,22 +1,27 @@
 package device.status.model;
 
-import device.status.br.SNMPManager;
-import device.status.model.Device;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Component
+@XmlRootElement
 public class DeviceCollection {
+    private static final Logger log = LoggerFactory.getLogger(DeviceCollection.class);
 
+    @XmlTransient
     public List<Device> deviceList = Collections.synchronizedList(new ArrayList<>());
 
     public List<Device> getDeviceList(){
         return deviceList;
     }
 
+    @XmlElement
     public void setDeviceList(List<Device> deviceList) {
         this.deviceList = deviceList;
     }
@@ -34,6 +39,7 @@ public class DeviceCollection {
         device.setName(deviceName);
         device.setIpAddress(deviceIp);
         deviceList.add(device);
+        log.info("Davice was added: " + device.getName() + "(" + device.getIpAddress() + ")");
         return device;
     }
 }

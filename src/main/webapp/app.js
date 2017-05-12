@@ -73,6 +73,17 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
      });
 }
 
+function saveSystem(event, deviceName, deviceIp){
+    event.preventDefault();
+     $.ajax({
+        url: 'saveSystem',
+        type: 'POST',
+        success : function(data) {
+            console.log(data)
+        }
+     });
+}
+
 var t = setInterval(updateRow, 6000);
 
 function updateRow(){
@@ -151,3 +162,26 @@ function updateDeviceStatus(tableData){
                 tableData.getElementsByTagName("td")[6].innerHTML = removeNulls(data.lastUpdate);
             }});
 };
+
+$('#myModal').on('show', function() {
+    var tit = $('.confirm-delete').data('title');
+
+    $('#myModal .modal-body p').html("Desea eliminar al usuario " + '<b>' + tit +'</b>' + ' ?');
+    var id = $(this).data('id'),
+    removeBtn = $(this).find('.danger');
+})
+
+$('.confirm-delete').on('click', function(e) {
+    e.preventDefault();
+
+    var id = $(this).data('id');
+    $('#myModal').data('id', id).modal('show');
+});
+
+$('#btnYes').click(function() {
+    // handle deletion here
+    var id = $('#myModal').data('id');
+    $('[data-id='+id+']').parents('tr').remove();
+    $('#myModal').modal('hide');
+
+});
