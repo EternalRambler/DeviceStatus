@@ -65,6 +65,12 @@ public class DeviceController {
         return systemTools.saveDataToXml() ? "OK" : " NOT OK";
     }
 
+    @PostMapping(value = "/loadSystem")
+    @ResponseBody
+    public String loadSystem(){
+        return systemTools.loadDataFile() ? "OK" : " NOT OK";
+    }
+
     @GetMapping(value = "/getDeviceOverviewStatus")
     @ResponseBody
     public int getOverviewStatus(@RequestParam("deviceId") String deviceId){

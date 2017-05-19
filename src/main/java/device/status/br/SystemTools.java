@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 @Component
@@ -33,5 +34,20 @@ public class SystemTools {
         }
 
         return true;
+    }
+
+    public boolean loadDataFile(){
+        try {
+            File file = new File("C:\\device_collection.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(DeviceCollection.class);
+
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            deviceList.setDeviceList(((DeviceCollection) jaxbUnmarshaller.unmarshal(file)).getDeviceList());
+            return true;
+
+        } catch (JAXBException e) {
+            log.error("JAXB failure !!!", e.getMessage());
+            return false;
+        }
     }
 }

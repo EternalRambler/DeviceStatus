@@ -15,12 +15,6 @@ import java.util.concurrent.Executor;
 @EnableScheduling
 @EnableAsync
 public class Application extends AsyncConfigurerSupport {
-
-  /*  @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class);
-    }
-*/
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();

@@ -6,8 +6,9 @@
 <head>
     <title>Test System 1</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript"></script>
     <script src="/app.js"></script>
 
@@ -17,7 +18,8 @@
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
-    <button type="button" class="btn btn-default navbar-btn" onclick="saveSystem(event);">Sign in</button>
+    <button type="button" class="btn btn-default navbar-btn" onclick="saveSystem(event);">Save System</button>
+    <button type="button" class="btn btn-default navbar-btn" onclick="loadSystem(event);">Load System</button>
     <div class="jumbotron">
         <h1>Test System 1</h1>
         <p>This service is use to monitored device status.</p>
@@ -70,7 +72,7 @@
                 <td>${device.osVersion}</td>
                 <td>${device.upTime}</td>
                 <td>${device.lastUpdate}</td>
-                <td><a href="#" class="confirm-delete btn mini red-stripe" role="button" data-title="kitty" data-id="2">Delete</a></td>
+                <td><a href="#" role="button" class="confirm-delete glyphicon glyphicon-trash" data-title=${device.name} data-toggle="modal" data-id=${device.id} data-target="#myModal"></a></td>
                 </tr>
                 </c:forEach>
                 </tbody>
@@ -79,17 +81,25 @@
     </div>
     </form>
 </div>
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h3 id="myModalLabel">Delete</h3>
-                        </div>
-                        <div class="modal-body">
-                            <p></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                            <button data-dismiss="modal" class="btn red" id="btnYes">Confirm</button>
-                        </div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button data-dismiss="modal" class="btn red" id="btnYes">Confirm</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>

@@ -73,7 +73,7 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
      });
 }
 
-function saveSystem(event, deviceName, deviceIp){
+function saveSystem(event){
     event.preventDefault();
      $.ajax({
         url: 'saveSystem',
@@ -84,68 +84,28 @@ function saveSystem(event, deviceName, deviceIp){
      });
 }
 
+function loadSystem(event){
+    event.preventDefault();
+     $.ajax({
+        url: 'loadSystem',
+        type: 'POST',
+        success : function(data) {
+            console.log(data)
+            window.location.reload();
+        }
+     });
+}
+
 var t = setInterval(updateRow, 6000);
 
 function updateRow(){
     var trs = document.getElementById("tableOfDevices").getElementsByTagName("tr");
 
      for(var i=0; i<trs.length; i++){
-        /*updateDevicePingStatus(trs[i]);
-        updateDeviceHostNameStatus(trs[i]);
-        updateDeviceOsStatus(trs[i]);
-        updateDeviceUpTimeStatus(trs[i]);*/
         getStatusMark(trs[i]);
         updateDeviceStatus(trs[i]);
      }
 };
-
-/*function updateDevicePingStatus(tableData){
-     $.ajax({
-            url: 'getDevicePingStatus',
-            type: 'GET',
-            data:{
-                        deviceId : tableData.id
-                   },
-            success : function(data) {
-                tableData.getElementsByTagName("td")[2].innerHTML = data;
-            }});
-};
-
-function updateDeviceHostNameStatus(tableData){
-     $.ajax({
-            url: 'getDeviceHostNameStatus',
-            type: 'GET',
-            data:{
-                        deviceId : tableData.id
-                   },
-            success : function(data) {
-                tableData.getElementsByTagName("td")[3].innerHTML = data;
-            }});
-};
-
-function updateDeviceOsStatus(tableData){
-     $.ajax({
-            url: 'getDeviceOsStatus',
-            type: 'GET',
-            data:{
-                        deviceId : tableData.id
-                   },
-            success : function(data) {
-                tableData.getElementsByTagName("td")[4].innerHTML = data;
-            }});
-};
-
-function updateDeviceUpTimeStatus(tableData){
-     $.ajax({
-            url: 'getDeviceUpTimeStatus',
-            type: 'GET',
-            data:{
-                        deviceId : tableData.id
-                   },
-            success : function(data) {
-                tableData.getElementsByTagName("td")[5].innerHTML = data;
-            }});
-};*/
 
 function updateDeviceStatus(tableData){
      $.ajax({
@@ -163,23 +123,23 @@ function updateDeviceStatus(tableData){
             }});
 };
 
-$('#myModal').on('show', function() {
+$(document).on('show.bs.modal','#myModal', function (e) {
+    var button = e.relatedTarget;
     var tit = $('.confirm-delete').data('title');
 
-    $('#myModal .modal-body p').html("Desea eliminar al usuario " + '<b>' + tit +'</b>' + ' ?');
-    var id = $(this).data('id'),
-    removeBtn = $(this).find('.danger');
-})
+    $('#myModal .modal-body p').html("Do your realy want to delete: " + '<b>' + tit +'</b>' + ' ?');
+});
 
-$('.confirm-delete').on('click', function(e) {
+/*$(document).$().on('.confirm-delete', 'click', function(e) {
     e.preventDefault();
 
     var id = $(this).data('id');
     $('#myModal').data('id', id).modal('show');
-});
+});*/
 
-$('#btnYes').click(function() {
+$(document).on("click","#btnYes", function(e) {
     // handle deletion here
+    e.preventDefault();
     var id = $('#myModal').data('id');
     $('[data-id='+id+']').parents('tr').remove();
     $('#myModal').modal('hide');
