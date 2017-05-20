@@ -20,7 +20,6 @@ class DeviceChecker {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     LocalDateTime now;
 
-    @Async
     void checkDevice(Device device){
         now = LocalDateTime.now();
         SNMPManager snmpManager;
@@ -30,7 +29,8 @@ class DeviceChecker {
             device.setOsVersion(snmpManager.getOsVersion().get());
             device.setUpTime(snmpManager.getUpTime().get());
             device.setPingStatus(pingEngine.pingAddressBySystemPing(device.getIpAddress()).get() ? "&#10003;" : "&#10007;");
-            log.info("For DEVICE: " + device.getIpAddress() + " work done - " + Thread.currentThread().getName());
+           // log.info("For DEVICE: " + device.getIpAddress() + " work done - " + Thread.currentThread().getName());
+            snmpManager.closeSNMPManager();
         } catch (IOException | InterruptedException | ExecutionException e) {
             log.error("Something goes wrong!!!", e);
             device.setHostName("&#10007;");

@@ -21,7 +21,7 @@ public class SystemTools {
     DeviceCollection deviceList;
 
     public boolean saveDataToXml(){
-        File file = new File("C:\\device_collection.xml");
+        File file = new File("C:\\DEVICE_STATUS\\device_collection.xml");
         JAXBContext jaxbContext = null;
         try {
             jaxbContext = JAXBContext.newInstance(DeviceCollection.class, Device.class);
@@ -38,7 +38,7 @@ public class SystemTools {
 
     public boolean loadDataFile(){
         try {
-            File file = new File("C:\\device_collection.xml");
+            File file = new File("C:\\DEVICE_STATUS\\device_collection.xml");
             JAXBContext jaxbContext = JAXBContext.newInstance(DeviceCollection.class);
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
