@@ -27,8 +27,8 @@ public class DeviceCollection {
         this.deviceList = deviceList;
     }
 
-    public boolean removeDevice(Device device){
-        return deviceList.remove(device);
+    public boolean removeDevice(String deviceId){
+        return  deviceList.removeIf(device -> device.getId().equals(deviceId));
     }
 
     public Device getDevice(String deviceId){

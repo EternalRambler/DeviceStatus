@@ -100,4 +100,10 @@ public class DeviceController {
     public Device getDevice(@RequestParam("deviceId") String deviceId){
         return deviceList.getDevice(deviceId);
     }
+
+    @PostMapping(value = "/removeDevice")
+    @ResponseBody
+    public boolean removeDevice(@RequestParam("deviceId") String deviceId){
+        return deviceList.removeDevice(deviceId);
+    }
 }
