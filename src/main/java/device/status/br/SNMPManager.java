@@ -27,7 +27,11 @@ public class SNMPManager {
     private void start() throws IOException {
         TransportMapping transport = new DefaultUdpTransportMapping();
         snmp = new Snmp(transport);
-        transport.listen();
+        snmp.listen();
+    }
+
+    public void closeSNMPManager() throws IOException {
+        snmp.close();
     }
 
     public String getAsString(OID oid){
@@ -46,17 +50,14 @@ public class SNMPManager {
         }
     }
 
-    @Async
     public Future<String> getHostName() {
         return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.5.0")));
     }
 
-    @Async
     public Future<String> getOsVersion() {
         return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.1.0")));
     }
 
-    @Async
     public Future<String> getUpTime() {
         return new AsyncResult<>(getAsString(new OID(".1.3.6.1.2.1.1.3.0")));
     }
@@ -80,7 +81,7 @@ public class SNMPManager {
         target.setCommunity(new OctetString("public"));
         target.setAddress(targetAddress);
         target.setRetries(1);
-        target.setTimeout(2000);
+        target.setTimeout(500);
         target.setVersion(SnmpConstants.version2c);
         return target;
     }

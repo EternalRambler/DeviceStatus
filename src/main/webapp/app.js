@@ -56,6 +56,7 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
      $.ajax({
         url: 'addNewDevice',
         type: 'POST',
+        async: true,
         data: {
                     deviceName : deviceName,
                     deviceIp : deviceIp
@@ -111,6 +112,7 @@ function updateDeviceStatus(tableData){
      $.ajax({
             url: 'getDevice',
             type: 'GET',
+            async: true,
             data:{
                         deviceId : tableData.id
                    },
