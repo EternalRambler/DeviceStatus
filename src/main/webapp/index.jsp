@@ -64,7 +64,7 @@
                 </thead>
                 <tbody id="tableOfDevices">
                 <c:forEach var="device" items="${devices}">
-                <tr class ="success" id=${device.id}>
+                <tr id=${device.id}>
                 <td>${device.name}</td>
                 <td>${device.ipAddress}</td>
                 <td>${device.pingStatus}</td>
@@ -72,7 +72,7 @@
                 <td>${device.osVersion}</td>
                 <td>${device.upTime}</td>
                 <td>${device.lastUpdate}</td>
-                <td><a href="#" role="button" class="confirm-delete glyphicon glyphicon-trash" data-title=${device.name} data-toggle="modal" data-id=${device.id} data-target="#myModal"></a></td>
+                <td><a href="#" role="button" class="confirm-delete glyphicon glyphicon-trash" data-toggle="modal" data-id=${device.id} data-target="#myModal"></a></td>
                 </tr>
                 </c:forEach>
                 </tbody>

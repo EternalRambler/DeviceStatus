@@ -63,7 +63,7 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
                },
         success : function(data) {
         $("#tableOfDevices")
-            .append("<tr class =success id=" + data.id + "><td>" + data.name + "</td> "
+            .append("<tr id=" + data.id + "><td>" + data.name + "</td> "
             + "<td>" + data.ipAddress + "</td>"
             + "<td>" + removeNulls(data.pingStatus) + "</td>"
             + "<td>" + removeNulls(data.hostName) + "</td>"
@@ -129,7 +129,7 @@ function updateDeviceStatus(tableData){
 $(document).on('show.bs.modal','#myModal', function (e) {
     var button = e.relatedTarget;
     var id = button.dataset.id;
-    var tit = $('.confirm-delete').data('title');
+    var tit = button.parentElement.parentElement.children[0].textContent; //ugly but work!
 
     $('#myModal').data('id', id)
     $('#myModal .modal-body p').html("Do your realy want to delete: " + '<b>' + tit +'</b>' + ' ?');
