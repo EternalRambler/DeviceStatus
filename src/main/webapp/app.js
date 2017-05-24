@@ -35,8 +35,8 @@ function getStatusMark(tableData) {
                     tableData.className = "danger";
                     break;
             }
-            console.log("Value in function: " + value)
-            console.log("Class name for 'tr' in function: " + tableData.className)
+//            console.log("Value in function: " + value)
+//            console.log("Class name for 'tr' in function: " + tableData.className)
         }
         })
 };
@@ -63,13 +63,14 @@ function addDeviceFunctionAjax(event, deviceName, deviceIp){
                },
         success : function(data) {
         $("#tableOfDevices")
-            .append("<tr class =success id=" + data.id + "><td>" + data.name + "</td> "
+            .append("<tr id=" + data.id + "><td>" + data.name + "</td> "
             + "<td>" + data.ipAddress + "</td>"
             + "<td>" + removeNulls(data.pingStatus) + "</td>"
             + "<td>" + removeNulls(data.hostName) + "</td>"
             + "<td>" + removeNulls(data.osVersion) + "</td>"
             + "<td>" + removeNulls(data.upTime) + "</td>"
-            + "<td>" + removeNulls(data.lastUpdate) + "</td></tr>");
+            + "<td>" + removeNulls(data.lastUpdate) + "</td>"
+            + "<td>" + "<a href=\"#\" role=\"button\" class=\"confirm-delete glyphicon glyphicon-trash\" data-title= " + data.name + " data-toggle=\"modal\" data-id=" + data.id + " data-target=\"#myModal\"></a></td></tr>");
         }
      });
 }
@@ -127,23 +128,34 @@ function updateDeviceStatus(tableData){
 
 $(document).on('show.bs.modal','#myModal', function (e) {
     var button = e.relatedTarget;
-    var tit = $('.confirm-delete').data('title');
+    var id = button.dataset.id;
+    var tit = button.parentElement.parentElement.children[0].textContent; //ugly but work!
 
+    $('#myModal').data('id', id)
     $('#myModal .modal-body p').html("Do your realy want to delete: " + '<b>' + tit +'</b>' + ' ?');
 });
 
-/*$(document).$().on('.confirm-delete', 'click', function(e) {
+$(document).on('.confirm-delete', 'click', function(e) {
     e.preventDefault();
 
     var id = $(this).data('id');
     $('#myModal').data('id', id).modal('show');
-});*/
+});
 
 $(document).on("click","#btnYes", function(e) {
     // handle deletion here
     e.preventDefault();
     var id = $('#myModal').data('id');
-    $('[data-id='+id+']').parents('tr').remove();
+    $.ajax({
+            url: 'removeDevice',
+            type: 'POST',
+            async: true,
+            data:{
+                deviceId : id
+            },
+            success : function(data) {
+                $('[data-id='+id+']').parents('tr').remove();
+            }
+         });
     $('#myModal').modal('hide');
-
 });
