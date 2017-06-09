@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
+        <version>1.5.4.RELEASE</version>
     </parent>
 
     <properties>
@@ -24,12 +24,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.5.4.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <version>1.5.4.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -56,11 +57,9 @@
         </dependency>
 
         <dependency>
-            <groupId>snmp4j</groupId>
+            <groupId>org.snmp4j</groupId>
             <artifactId>snmp4j</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/thirdparty/snmp4j-2.5.6.jar</systemPath>
+            <version>2.5.0</version>
         </dependency>
 
     </dependencies>
