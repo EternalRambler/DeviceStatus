@@ -13,7 +13,6 @@ import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @EnableScheduling
-@EnableAsync
 public class Application extends SpringBootServletInitializer {
 
     @Override
