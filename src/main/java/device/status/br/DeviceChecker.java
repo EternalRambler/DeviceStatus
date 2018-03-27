@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ExecutionException;
 
-@Service
+@Component
 class DeviceChecker {
     private static final Logger log = LoggerFactory.getLogger(DeviceStatus.class);
     private PingEngine pingEngine = new PingEngine();
